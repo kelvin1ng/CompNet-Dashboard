@@ -1,6 +1,6 @@
 "use client"
 
-import { useState } from "react"
+import { useState, useEffect } from "react"
 import { useRouter } from "next/navigation" // Added useRouter import for navigation
 import { Header } from "@/components/layout/header"
 import { Sidebar } from "@/components/layout/sidebar"
@@ -39,6 +39,12 @@ import {
 export default function HomePage() {
   const [sidebarCollapsed, setSidebarCollapsed] = useState(false)
   const router = useRouter() // Added router instance for navigation
+  const [activeTab, setActiveTab] = useState("student-activity")
+  const [lastUpdated, setLastUpdated] = useState(new Date())
+
+  useEffect(() => {
+    setLastUpdated(new Date())
+  }, [activeTab])
 
   const topMetrics = [
     { label: "Active Students", value: "847", trend: "+5.2%", icon: Users },
@@ -102,6 +108,12 @@ export default function HomePage() {
     { name: "Critical", value: 0, color: "#ef4444" },
   ]
 
+  const reportDistribution = [
+    { name: "Performance", value: 4, color: "#3b82f6" },
+    { name: "Usage", value: 3, color: "#10b981" },
+    { name: "Security", value: 2, color: "#f59e0b" },
+  ]
+
   const getStatusIcon = (status: string) => {
     switch (status) {
       case "healthy":
@@ -129,14 +141,13 @@ export default function HomePage() {
   }
 
   return (
-    <div className="min-h-screen bg-gray-50">
+    <div className="min-h-screen">
       <Header onMenuToggle={() => setSidebarCollapsed(!sidebarCollapsed)} />
 
       <div className="flex">
         <Sidebar collapsed={sidebarCollapsed} onToggle={() => setSidebarCollapsed(!sidebarCollapsed)} />
-
         <main className="flex-1 p-6">
-          <div className="max-w-7xl mx-auto">
+          <div className="max-w-7xl mx-auto bg-white/80 backdrop-blur-sm rounded-xl shadow-lg p-8">
             <div className="mb-8">
               <h1 className="text-2xl font-bold text-gray-900 mb-2">Student System Analytics</h1>
               <p className="text-gray-600">Master of Computer Networks Program - Toronto Metropolitan University</p>
@@ -145,7 +156,13 @@ export default function HomePage() {
             {/* Top Metrics Row */}
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 mb-8">
               {topMetrics.map((metric, index) => (
-                <Card key={index} className="hover:shadow-md transition-shadow">
+                <Card
+                  key={index}
+                  className="hover:shadow-md transition-shadow cursor-pointer"
+                  onClick={() =>
+                    setActiveTab(index === 3 ? "system-performance" : "student-activity")
+                  }
+                >
                   <CardContent className="p-4">
                     <div className="flex items-center justify-between">
                       <div>
@@ -166,7 +183,7 @@ export default function HomePage() {
             </div>
 
             {/* Tabbed Interface */}
-            <Tabs defaultValue="student-activity" className="space-y-6">
+            <Tabs value={activeTab} onValueChange={setActiveTab} className="space-y-6">
               <TabsList className="inline-flex h-10 items-center justify-center rounded-md bg-muted p-1 text-muted-foreground">
                 <TabsTrigger value="student-activity" className="flex items-center gap-2 px-4 py-2">
                   <GraduationCap className="h-4 w-4" />
@@ -183,6 +200,7 @@ export default function HomePage() {
               </TabsList>
 
               <TabsContent value="student-activity" className="space-y-6">
+                <p className="text-sm text-gray-500">Last updated: {lastUpdated.toLocaleTimeString()}</p>
                 <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
                   <Card>
                     <CardHeader>
@@ -441,6 +459,7 @@ export default function HomePage() {
               </TabsContent>
 
               <TabsContent value="system-performance" className="space-y-6">
+                <p className="text-sm text-gray-500">Last updated: {lastUpdated.toLocaleTimeString()}</p>
                 <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
                   <Card>
                     <CardHeader>
@@ -607,6 +626,7 @@ export default function HomePage() {
               </TabsContent>
 
               <TabsContent value="academic-reports" className="space-y-6">
+                <p className="text-sm text-gray-500">Last updated: {lastUpdated.toLocaleTimeString()}</p>
                 <Card>
                   <CardHeader>
                     <CardTitle>Academic Report Builder</CardTitle>
@@ -627,6 +647,40 @@ export default function HomePage() {
                         New Academic Report
                       </Button>
                     </div>
+                  </CardContent>
+                </Card>
+                <Card>
+                  <CardHeader>
+                    <CardTitle>Report Type Breakdown</CardTitle>
+                    <CardDescription>Distribution of active reports</CardDescription>
+                  </CardHeader>
+                  <CardContent>
+                    <ChartContainer
+                      config={{
+                        Performance: { label: "Performance", color: "#3b82f6" },
+                        Usage: { label: "Usage", color: "#10b981" },
+                        Security: { label: "Security", color: "#f59e0b" },
+                      }}
+                      className="h-64"
+                    >
+                      <ResponsiveContainer width="100%" height="100%">
+                        <PieChart>
+                          <Pie
+                            data={reportDistribution}
+                            cx="50%"
+                            cy="50%"
+                            innerRadius={40}
+                            outerRadius={80}
+                            dataKey="value"
+                          >
+                            {reportDistribution.map((entry, index) => (
+                              <Cell key={`cell-${index}`} fill={entry.color} />
+                            ))}
+                          </Pie>
+                          <ChartTooltip content={<ChartTooltipContent />} />
+                        </PieChart>
+                      </ResponsiveContainer>
+                    </ChartContainer>
                   </CardContent>
                 </Card>
 

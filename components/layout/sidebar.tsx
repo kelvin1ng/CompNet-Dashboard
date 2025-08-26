@@ -20,7 +20,12 @@ export function Sidebar({ collapsed = false, onToggle }: SidebarProps) {
   const pathname = usePathname()
 
   return (
-    <div className={cn("bg-gray-50 border-r border-gray-200 transition-all duration-300", collapsed ? "w-16" : "w-64")}>
+    <div
+      className={cn(
+        "bg-white/90 backdrop-blur-md border-r border-gray-200 shadow-lg transition-all duration-300",
+        collapsed ? "w-16" : "w-64",
+      )}
+    >
       <div className="flex flex-col h-full">
         <div className="p-4 border-b border-gray-200">
           <Button variant="ghost" size="icon" onClick={onToggle} className="ml-auto">
