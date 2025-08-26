@@ -1,7 +1,9 @@
 import type { Metadata } from 'next'
-import { GeistSans } from 'geist/font/sans'
+import { Inter } from 'next/font/google'
 import { GeistMono } from 'geist/font/mono'
 import './globals.css'
+
+const inter = Inter({ subsets: ['latin'], variable: '--font-sans' })
 
 export const metadata: Metadata = {
   title: 'CompNet',
@@ -14,17 +16,19 @@ export default function RootLayout({
   children: React.ReactNode
 }>) {
   return (
-    <html lang="en">
+    <html lang="en" className={inter.variable}>
       <head>
         <style>{`
 html {
-  font-family: ${GeistSans.style.fontFamily};
-  --font-sans: ${GeistSans.variable};
+  font-family: ${inter.style.fontFamily};
+  --font-sans: ${inter.variable};
   --font-mono: ${GeistMono.variable};
 }
         `}</style>
       </head>
-      <body>{children}</body>
+      <body className="min-h-screen bg-gradient-to-br from-gray-50 to-gray-100 antialiased">
+        {children}
+      </body>
     </html>
   )
 }
