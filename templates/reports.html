@@ -1,0 +1,689 @@
+{% extends "base.html" %}
+
+{% block title %}Reports - CompNet{% endblock %}
+
+{% block content %}
+<div class="max-w-7xl mx-auto">
+    <div class="mb-8">
+        <h1 class="text-2xl font-bold text-gray-900 mb-2">Report Generation</h1>
+        <p class="text-gray-600">Create, schedule, and manage your analytics reports</p>
+    </div>
+
+    <div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
+        <!-- Report Wizard -->
+        <div class="lg:col-span-2">
+            <div class="card">
+                <div class="card-header">
+                    <h3 class="card-title">Create New Report</h3>
+                    <p class="card-description">Follow the step-by-step wizard to generate your custom report</p>
+                </div>
+                <div class="card-content">
+                    <!-- Progress Indicator -->
+                    <div class="mb-8">
+                        <div class="flex items-center justify-between mb-4" id="progress-steps">
+                            <div class="flex items-center step-item" data-step="1">
+                                <div class="flex items-center justify-center w-8 h-8 rounded-full text-sm font-medium bg-blue-600 text-white step-circle">
+                                    1
+                                </div>
+                                <div class="w-16 h-0.5 mx-2 bg-gray-200 step-line"></div>
+                            </div>
+                            <div class="flex items-center step-item" data-step="2">
+                                <div class="flex items-center justify-center w-8 h-8 rounded-full text-sm font-medium bg-gray-200 text-gray-600 step-circle">
+                                    2
+                                </div>
+                                <div class="w-16 h-0.5 mx-2 bg-gray-200 step-line"></div>
+                            </div>
+                            <div class="flex items-center step-item" data-step="3">
+                                <div class="flex items-center justify-center w-8 h-8 rounded-full text-sm font-medium bg-gray-200 text-gray-600 step-circle">
+                                    3
+                                </div>
+                                <div class="w-16 h-0.5 mx-2 bg-gray-200 step-line"></div>
+                            </div>
+                            <div class="flex items-center step-item" data-step="4">
+                                <div class="flex items-center justify-center w-8 h-8 rounded-full text-sm font-medium bg-gray-200 text-gray-600 step-circle">
+                                    4
+                                </div>
+                                <div class="w-16 h-0.5 mx-2 bg-gray-200 step-line"></div>
+                            </div>
+                            <div class="flex items-center step-item" data-step="5">
+                                <div class="flex items-center justify-center w-8 h-8 rounded-full text-sm font-medium bg-gray-200 text-gray-600 step-circle">
+                                    5
+                                </div>
+                            </div>
+                        </div>
+                        <div class="text-center">
+                            <h3 class="font-medium text-gray-900" id="step-title">Select Type</h3>
+                            <p class="text-sm text-gray-600" id="step-description">Choose report type and metrics</p>
+                        </div>
+                    </div>
+
+                    <!-- Step Content -->
+                    <!-- Step 1: Select Type -->
+                    <div class="step-content space-y-6" data-step="1">
+                        <div>
+                            <label class="text-base font-medium">Report Type</label>
+                            <div class="grid grid-cols-1 md:grid-cols-3 gap-4 mt-3">
+                                <div class="card cursor-pointer hover-card report-type-card" data-type="analytics">
+                                    <div class="card-content p-4 text-center">
+                                        <i data-lucide="bar-chart-3" class="h-8 w-8 mx-auto mb-2 text-blue-600"></i>
+                                        <h4 class="font-medium text-gray-900 mb-1">Analytics Report</h4>
+                                        <p class="text-xs text-gray-600">Student behavior and engagement analytics</p>
+                                    </div>
+                                </div>
+                                <div class="card cursor-pointer hover-card report-type-card" data-type="performance">
+                                    <div class="card-content p-4 text-center">
+                                        <i data-lucide="trending-up" class="h-8 w-8 mx-auto mb-2 text-blue-600"></i>
+                                        <h4 class="font-medium text-gray-900 mb-1">Performance Report</h4>
+                                        <p class="text-xs text-gray-600">System and microservice performance metrics</p>
+                                    </div>
+                                </div>
+                                <div class="card cursor-pointer hover-card report-type-card" data-type="dashboard">
+                                    <div class="card-content p-4 text-center">
+                                        <i data-lucide="pie-chart" class="h-8 w-8 mx-auto mb-2 text-blue-600"></i>
+                                        <h4 class="font-medium text-gray-900 mb-1">Custom Dashboard</h4>
+                                        <p class="text-xs text-gray-600">Personalized MCN program metrics view</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div>
+                            <label class="text-base font-medium">Select Metrics (Optional - Leave empty to include all metrics)</label>
+                            <div class="grid grid-cols-2 gap-2 mt-3">
+                                <label class="flex items-center space-x-2 p-2 rounded hover:bg-gray-50">
+                                    <input type="checkbox" class="rounded border-gray-300 metric-checkbox" value="Active Students">
+                                    <span class="text-sm text-gray-700">Active Students</span>
+                                </label>
+                                <label class="flex items-center space-x-2 p-2 rounded hover:bg-gray-50">
+                                    <input type="checkbox" class="rounded border-gray-300 metric-checkbox" value="System Sessions">
+                                    <span class="text-sm text-gray-700">System Sessions</span>
+                                </label>
+                                <label class="flex items-center space-x-2 p-2 rounded hover:bg-gray-50">
+                                    <input type="checkbox" class="rounded border-gray-300 metric-checkbox" value="VM Usage">
+                                    <span class="text-sm text-gray-700">VM Usage</span>
+                                </label>
+                                <label class="flex items-center space-x-2 p-2 rounded hover:bg-gray-50">
+                                    <input type="checkbox" class="rounded border-gray-300 metric-checkbox" value="Lab Completion Rate">
+                                    <span class="text-sm text-gray-700">Lab Completion Rate</span>
+                                </label>
+                                <label class="flex items-center space-x-2 p-2 rounded hover:bg-gray-50">
+                                    <input type="checkbox" class="rounded border-gray-300 metric-checkbox" value="Service Uptime">
+                                    <span class="text-sm text-gray-700">Service Uptime</span>
+                                </label>
+                                <label class="flex items-center space-x-2 p-2 rounded hover:bg-gray-50">
+                                    <input type="checkbox" class="rounded border-gray-300 metric-checkbox" value="Average Session Duration">
+                                    <span class="text-sm text-gray-700">Average Session Duration</span>
+                                </label>
+                                <label class="flex items-center space-x-2 p-2 rounded hover:bg-gray-50">
+                                    <input type="checkbox" class="rounded border-gray-300 metric-checkbox" value="Most Used Services">
+                                    <span class="text-sm text-gray-700">Most Used Services</span>
+                                </label>
+                                <label class="flex items-center space-x-2 p-2 rounded hover:bg-gray-50">
+                                    <input type="checkbox" class="rounded border-gray-300 metric-checkbox" value="Network Lab Performance">
+                                    <span class="text-sm text-gray-700">Network Lab Performance</span>
+                                </label>
+                            </div>
+                            <p class="text-xs text-blue-600 mt-2" id="metrics-info">No metrics selected - all available data will be included in the report</p>
+                        </div>
+                    </div>
+
+                    <!-- Step 2: Configure -->
+                    <div class="step-content space-y-6 hidden" data-step="2">
+                        <div>
+                            <label class="text-base font-medium">Date Range</label>
+                            <div class="grid grid-cols-2 gap-4 mt-3">
+                                <div>
+                                    <label class="text-sm">Start Date</label>
+                                    <input type="date" id="startDate" class="mt-1 w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500">
+                                </div>
+                                <div>
+                                    <label class="text-sm">End Date</label>
+                                    <input type="date" id="endDate" class="mt-1 w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500">
+                                </div>
+                            </div>
+                        </div>
+
+                        <div>
+                            <label class="text-base font-medium">Filters</label>
+                            <div class="grid grid-cols-2 gap-2 mt-3">
+                                <label class="flex items-center space-x-2 p-2 rounded hover:bg-gray-50">
+                                    <input type="checkbox" class="rounded border-gray-300 filter-checkbox" value="Computer Networks Students">
+                                    <span class="text-sm text-gray-700">Computer Networks Students</span>
+                                </label>
+                                <label class="flex items-center space-x-2 p-2 rounded hover:bg-gray-50">
+                                    <input type="checkbox" class="rounded border-gray-300 filter-checkbox" value="Active Users Only">
+                                    <span class="text-sm text-gray-700">Active Users Only</span>
+                                </label>
+                                <label class="flex items-center space-x-2 p-2 rounded hover:bg-gray-50">
+                                    <input type="checkbox" class="rounded border-gray-300 filter-checkbox" value="Lab Sessions Only">
+                                    <span class="text-sm text-gray-700">Lab Sessions Only</span>
+                                </label>
+                                <label class="flex items-center space-x-2 p-2 rounded hover:bg-gray-50">
+                                    <input type="checkbox" class="rounded border-gray-300 filter-checkbox" value="Exam Activities Only">
+                                    <span class="text-sm text-gray-700">Exam Activities Only</span>
+                                </label>
+                                <label class="flex items-center space-x-2 p-2 rounded hover:bg-gray-50">
+                                    <input type="checkbox" class="rounded border-gray-300 filter-checkbox" value="High Engagement Users">
+                                    <span class="text-sm text-gray-700">High Engagement Users</span>
+                                </label>
+                                <label class="flex items-center space-x-2 p-2 rounded hover:bg-gray-50">
+                                    <input type="checkbox" class="rounded border-gray-300 filter-checkbox" value="Mobile Users Only">
+                                    <span class="text-sm text-gray-700">Mobile Users Only</span>
+                                </label>
+                            </div>
+                        </div>
+
+                        <div>
+                            <label class="text-base font-medium">Data Refresh Interval</label>
+                            <select class="mt-2 w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500">
+                                <option value="">Select refresh interval</option>
+                                <option value="realtime">Real-time</option>
+                                <option value="hourly">Hourly</option>
+                                <option value="daily">Daily</option>
+                                <option value="weekly">Weekly</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <!-- Step 3: Preview -->
+                    <div class="step-content space-y-6 hidden" data-step="3">
+                        <div>
+                            <label class="text-base font-medium">Report Preview</label>
+                            <div class="mt-3 p-4 border rounded-lg bg-gray-50">
+                                <div class="mb-4">
+                                    <h4 class="font-medium text-gray-900">Report Configuration Summary</h4>
+                                    <div class="mt-2 space-y-1 text-sm text-gray-600" id="config-summary">
+                                        <p><strong>Type:</strong> <span id="summary-type">Analytics Report</span></p>
+                                        <p><strong>Metrics:</strong> <span id="summary-metrics">All metrics included</span></p>
+                                        <p><strong>Date Range:</strong> <span id="summary-dates">Default range (last 30 days)</span></p>
+                                        <p><strong>Filters:</strong> <span id="summary-filters">No filters applied</span></p>
+                                    </div>
+                                </div>
+
+                                <div class="border-t pt-4">
+                                    <h5 class="font-medium text-gray-900 mb-2">Sample Data Preview</h5>
+                                    <div class="text-xs text-gray-600 font-mono bg-white p-3 rounded border max-h-40 overflow-y-auto" id="sample-preview">
+                                        <div>TORONTO METROPOLITAN UNIVERSITY</div>
+                                        <div>Master of Computer Networks Program</div>
+                                        <div>Student System Analytics</div>
+                                        <div class="mt-2">
+                                            <div>Total Students: 847</div>
+                                            <div>Active Students: 623</div>
+                                            <div>Engagement Rate: 73.6%</div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div>
+                            <label class="text-base font-medium">Estimated Report Size</label>
+                            <div class="mt-2 text-sm text-gray-600">
+                                <p>Estimated pages: 8-12 pages</p>
+                                <p>Estimated file size: 2-5 MB</p>
+                                <p>Generation time: ~30 seconds</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Step 4: Export -->
+                    <div class="step-content space-y-6 hidden" data-step="4">
+                        <div>
+                            <label class="text-base font-medium">Export Format</label>
+                            <div class="grid grid-cols-3 gap-4 mt-3">
+                                <div class="card cursor-pointer hover-card export-format-card" data-format="PDF">
+                                    <div class="card-content p-4 text-center">
+                                        <i data-lucide="file-text" class="h-6 w-6 mx-auto mb-2 text-blue-600"></i>
+                                        <h4 class="font-medium text-gray-900">PDF</h4>
+                                    </div>
+                                </div>
+                                <div class="card cursor-pointer hover-card export-format-card" data-format="Excel">
+                                    <div class="card-content p-4 text-center">
+                                        <i data-lucide="file-text" class="h-6 w-6 mx-auto mb-2 text-blue-600"></i>
+                                        <h4 class="font-medium text-gray-900">Excel</h4>
+                                    </div>
+                                </div>
+                                <div class="card cursor-pointer hover-card export-format-card" data-format="CSV">
+                                    <div class="card-content p-4 text-center">
+                                        <i data-lucide="file-text" class="h-6 w-6 mx-auto mb-2 text-blue-600"></i>
+                                        <h4 class="font-medium text-gray-900">CSV</h4>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div>
+                            <label for="email">Email Recipients (Optional)</label>
+                            <input type="email" id="email" placeholder="Enter email addresses separated by commas" class="mt-1 w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500">
+                        </div>
+                    </div>
+
+                    <!-- Step 5: Schedule -->
+                    <div class="step-content space-y-6 hidden" data-step="5">
+                        <div>
+                            <label class="text-base font-medium">Schedule Options</label>
+                            <div class="grid grid-cols-1 gap-4 mt-3">
+                                <div class="card cursor-pointer hover-card schedule-option-card" data-schedule="once">
+                                    <div class="card-content p-4 flex items-center space-x-3">
+                                        <i data-lucide="file-text" class="h-5 w-5 text-blue-600"></i>
+                                        <div>
+                                            <h4 class="font-medium text-gray-900">Generate Once</h4>
+                                            <p class="text-sm text-gray-600">Generate and download immediately</p>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="card cursor-pointer hover-card schedule-option-card" data-schedule="daily">
+                                    <div class="card-content p-4 flex items-center space-x-3">
+                                        <i data-lucide="calendar" class="h-5 w-5 text-blue-600"></i>
+                                        <div>
+                                            <h4 class="font-medium text-gray-900">Daily Schedule</h4>
+                                            <p class="text-sm text-gray-600">Generate report every day</p>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="card cursor-pointer hover-card schedule-option-card" data-schedule="weekly">
+                                    <div class="card-content p-4 flex items-center space-x-3">
+                                        <i data-lucide="calendar" class="h-5 w-5 text-blue-600"></i>
+                                        <div>
+                                            <h4 class="font-medium text-gray-900">Weekly Schedule</h4>
+                                            <p class="text-sm text-gray-600">Generate report every week</p>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="card cursor-pointer hover-card schedule-option-card" data-schedule="monthly">
+                                    <div class="card-content p-4 flex items-center space-x-3">
+                                        <i data-lucide="calendar" class="h-5 w-5 text-blue-600"></i>
+                                        <div>
+                                            <h4 class="font-medium text-gray-900">Monthly Schedule</h4>
+                                            <p class="text-sm text-gray-600">Generate report every month</p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div id="schedule-details" class="space-y-4 hidden">
+                            <div>
+                                <label class="text-base font-medium">Delivery Time</label>
+                                <div class="flex items-center space-x-2 mt-2">
+                                    <i data-lucide="clock" class="h-4 w-4 text-gray-500"></i>
+                                    <input type="time" id="deliveryTime" class="flex-1 px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500">
+                                </div>
+                            </div>
+
+                            <div>
+                                <label class="text-base font-medium">Timezone</label>
+                                <select id="timezone" class="mt-2 w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500">
+                                    <option value="">Select timezone</option>
+                                    <option value="EST">Eastern Time (EST)</option>
+                                    <option value="CST">Central Time (CST)</option>
+                                    <option value="MST">Mountain Time (MST)</option>
+                                    <option value="PST">Pacific Time (PST)</option>
+                                    <option value="UTC">UTC</option>
+                                </select>
+                            </div>
+
+                            <div>
+                                <label class="text-base font-medium">Email Recipients for Scheduled Reports</label>
+                                <div class="flex items-center space-x-2 mt-2">
+                                    <i data-lucide="mail" class="h-4 w-4 text-gray-500"></i>
+                                    <input type="email" id="scheduledEmail" placeholder="Enter email addresses separated by commas" class="flex-1 px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Navigation Buttons -->
+                    <div class="flex justify-between pt-6 border-t">
+                        <button id="back-btn" class="btn btn-outline" disabled>Back</button>
+                        <button id="next-btn" class="btn btn-primary" disabled>Next</button>
+                    </div>
+
+                    <!-- Success Message -->
+                    <div id="success-message" class="hidden mt-4 p-4 bg-green-50 border border-green-200 rounded-lg">
+                        <div class="flex items-center">
+                            <i data-lucide="check-circle" class="h-5 w-5 text-green-600 mr-2"></i>
+                            <span class="text-green-800 font-medium">Report generated successfully!</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Existing Reports Sidebar -->
+        <div>
+            <div class="card">
+                <div class="card-header">
+                    <h3 class="card-title">Existing Reports</h3>
+                    <p class="card-description">Manage your previously generated reports</p>
+                </div>
+                <div class="card-content">
+                    <div class="space-y-4">
+                        {% for report in academic_reports %}
+                        <div class="p-3 border rounded-lg">
+                            <h4 class="font-medium text-sm text-gray-900">{{ report.name }}</h4>
+                            <div class="mt-1 space-y-1 text-xs text-gray-600">
+                                <p>Type: {{ report.type }}</p>
+                                <p>Status: <span class="font-medium {% if report.status == 'Active' %}text-green-600{% else %}text-gray-600{% endif %}">{{ report.status }}</span></p>
+                                <p>Last Run: 2025-01-03 09:00</p>
+                                <p>Next Run: 2025-01-10 09:00</p>
+                                <p>Format: PDF</p>
+                            </div>
+                            <div class="mt-2 flex space-x-2">
+                                <button class="btn btn-outline text-xs download-report-btn" data-report="{{ report.name }}">Download</button>
+                                <button class="btn btn-outline text-xs edit-report-btn" data-report="{{ report.name }}">Edit</button>
+                            </div>
+                        </div>
+                        {% endfor %}
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    lucide.createIcons();
+    
+    let currentStep = 1;
+    let selectedReportType = null;
+    let selectedExportFormat = null;
+    let selectedSchedule = 'once';
+    let selectedMetrics = [];
+    let selectedFilters = [];
+    
+    const steps = [
+        { id: 1, title: "Select Type", description: "Choose report type and metrics" },
+        { id: 2, title: "Configure", description: "Set parameters and filters" },
+        { id: 3, title: "Preview", description: "Review report layout" },
+        { id: 4, title: "Export", description: "Choose format and destination" },
+        { id: 5, title: "Schedule", description: "Set up automated delivery" }
+    ];
+    
+    const backBtn = document.getElementById('back-btn');
+    const nextBtn = document.getElementById('next-btn');
+    
+    // Update step display
+    function updateStep() {
+        // Update progress indicator
+        document.querySelectorAll('.step-item').forEach((item, index) => {
+            const circle = item.querySelector('.step-circle');
+            const line = item.querySelector('.step-line');
+            
+            if (index + 1 < currentStep) {
+                circle.className = 'flex items-center justify-center w-8 h-8 rounded-full text-sm font-medium bg-blue-600 text-white step-circle';
+                circle.innerHTML = '<i data-lucide="check" class="h-4 w-4"></i>';
+                if (line) line.className = 'w-16 h-0.5 mx-2 bg-blue-600 step-line';
+            } else if (index + 1 === currentStep) {
+                circle.className = 'flex items-center justify-center w-8 h-8 rounded-full text-sm font-medium bg-blue-600 text-white step-circle';
+                circle.textContent = index + 1;
+                if (line) line.className = 'w-16 h-0.5 mx-2 bg-gray-200 step-line';
+            } else {
+                circle.className = 'flex items-center justify-center w-8 h-8 rounded-full text-sm font-medium bg-gray-200 text-gray-600 step-circle';
+                circle.textContent = index + 1;
+                if (line) line.className = 'w-16 h-0.5 mx-2 bg-gray-200 step-line';
+            }
+        });
+        
+        // Update step title and description
+        document.getElementById('step-title').textContent = steps[currentStep - 1].title;
+        document.getElementById('step-description').textContent = steps[currentStep - 1].description;
+        
+        // Show/hide step content
+        document.querySelectorAll('.step-content').forEach(content => {
+            content.classList.add('hidden');
+        });
+        document.querySelector(`[data-step="${currentStep}"]`).classList.remove('hidden');
+        
+        // Update navigation buttons
+        backBtn.disabled = currentStep === 1;
+        updateNextButton();
+        
+        lucide.createIcons();
+    }
+    
+    function updateNextButton() {
+        let canProceed = false;
+        
+        switch(currentStep) {
+            case 1:
+                canProceed = selectedReportType !== null;
+                break;
+            case 2:
+                canProceed = true; // Configuration is optional
+                break;
+            case 3:
+                canProceed = true; // Preview is just for review
+                break;
+            case 4:
+                canProceed = selectedExportFormat !== null;
+                break;
+            case 5:
+                if (selectedSchedule === 'once') {
+                    canProceed = true;
+                } else {
+                    const deliveryTime = document.getElementById('deliveryTime').value;
+                    const timezone = document.getElementById('timezone').value;
+                    canProceed = deliveryTime && timezone;
+                }
+                break;
+        }
+        
+        nextBtn.disabled = !canProceed;
+        
+        if (currentStep === 5) {
+            nextBtn.textContent = 'Generate Report';
+            nextBtn.className = 'btn bg-green-600 hover:bg-green-700 text-white';
+        } else {
+            nextBtn.textContent = 'Next';
+            nextBtn.className = 'btn btn-primary';
+        }
+    }
+    
+    // Report type selection
+    document.querySelectorAll('.report-type-card').forEach(card => {
+        card.addEventListener('click', function() {
+            document.querySelectorAll('.report-type-card').forEach(c => {
+                c.classList.remove('border-blue-500', 'bg-blue-50', 'shadow-md');
+            });
+            this.classList.add('border-blue-500', 'bg-blue-50', 'shadow-md');
+            selectedReportType = this.dataset.type;
+            updateNextButton();
+        });
+    });
+    
+    // Export format selection
+    document.querySelectorAll('.export-format-card').forEach(card => {
+        card.addEventListener('click', function() {
+            document.querySelectorAll('.export-format-card').forEach(c => {
+                c.classList.remove('border-blue-500', 'bg-blue-50', 'shadow-md');
+            });
+            this.classList.add('border-blue-500', 'bg-blue-50', 'shadow-md');
+            selectedExportFormat = this.dataset.format;
+            updateNextButton();
+        });
+    });
+    
+    // Schedule option selection
+    document.querySelectorAll('.schedule-option-card').forEach(card => {
+        card.addEventListener('click', function() {
+            document.querySelectorAll('.schedule-option-card').forEach(c => {
+                c.classList.remove('border-blue-500', 'bg-blue-50', 'shadow-md');
+            });
+            this.classList.add('border-blue-500', 'bg-blue-50', 'shadow-md');
+            selectedSchedule = this.dataset.schedule;
+            
+            const scheduleDetails = document.getElementById('schedule-details');
+            if (selectedSchedule !== 'once') {
+                scheduleDetails.classList.remove('hidden');
+            } else {
+                scheduleDetails.classList.add('hidden');
+            }
+            updateNextButton();
+        });
+    });
+    
+    // Metrics selection
+    document.querySelectorAll('.metric-checkbox').forEach(checkbox => {
+        checkbox.addEventListener('change', function() {
+            if (this.checked) {
+                selectedMetrics.push(this.value);
+            } else {
+                selectedMetrics = selectedMetrics.filter(m => m !== this.value);
+            }
+            
+            const metricsInfo = document.getElementById('metrics-info');
+            if (selectedMetrics.length === 0) {
+                metricsInfo.textContent = 'No metrics selected - all available data will be included in the report';
+            } else {
+                metricsInfo.textContent = `Selected metrics: ${selectedMetrics.join(', ')}`;
+            }
+        });
+    });
+    
+    // Filters selection
+    document.querySelectorAll('.filter-checkbox').forEach(checkbox => {
+        checkbox.addEventListener('change', function() {
+            if (this.checked) {
+                selectedFilters.push(this.value);
+            } else {
+                selectedFilters = selectedFilters.filter(f => f !== this.value);
+            }
+        });
+    });
+    
+    // Navigation
+    backBtn.addEventListener('click', function() {
+        if (currentStep > 1) {
+            currentStep--;
+            updateStep();
+        }
+    });
+    
+    nextBtn.addEventListener('click', function() {
+        if (currentStep < 5) {
+            if (currentStep === 2) {
+                updatePreview();
+            }
+            currentStep++;
+            updateStep();
+        } else {
+            generateReport();
+        }
+    });
+    
+    function updatePreview() {
+        document.getElementById('summary-type').textContent = selectedReportType.charAt(0).toUpperCase() + selectedReportType.slice(1) + ' Report';
+        document.getElementById('summary-metrics').textContent = selectedMetrics.length > 0 ? selectedMetrics.join(', ') : 'All metrics included';
+        
+        const startDate = document.getElementById('startDate').value;
+        const endDate = document.getElementById('endDate').value;
+        document.getElementById('summary-dates').textContent = startDate && endDate ? `${startDate} to ${endDate}` : 'Default range (last 30 days)';
+        document.getElementById('summary-filters').textContent = selectedFilters.length > 0 ? selectedFilters.join(', ') : 'No filters applied';
+        
+        // Update sample preview based on report type
+        const samplePreview = document.getElementById('sample-preview');
+        if (selectedReportType === 'analytics') {
+            samplePreview.innerHTML = `
+                <div>TORONTO METROPOLITAN UNIVERSITY</div>
+                <div>Master of Computer Networks Program</div>
+                <div>Student System Analytics</div>
+                <div class="mt-2">
+                    <div>Total Students: 847</div>
+                    <div>Active Students: 623</div>
+                    <div>Engagement Rate: 73.6%</div>
+                </div>
+            `;
+        } else if (selectedReportType === 'performance') {
+            samplePreview.innerHTML = `
+                <div>TORONTO METROPOLITAN UNIVERSITY</div>
+                <div>Master of Computer Networks Program</div>
+                <div>System Performance Report</div>
+                <div class="mt-2">
+                    <div>System Uptime: 99.8%</div>
+                    <div>Average Response Time: 245ms</div>
+                    <div>Total Requests: 156.7K</div>
+                </div>
+            `;
+        } else {
+            samplePreview.innerHTML = `
+                <div>TORONTO METROPOLITAN UNIVERSITY</div>
+                <div>Master of Computer Networks Program</div>
+                <div>Custom Dashboard Report</div>
+                <div class="mt-2">
+                    <div>Enrolled Students: 847</div>
+                    <div>Completed Labs: 1456</div>
+                    <div>VM Hours Used: 2340</div>
+                </div>
+            `;
+        }
+    }
+    
+    function generateReport() {
+        nextBtn.disabled = true;
+        nextBtn.textContent = 'Generating...';
+        
+        // Simulate report generation
+        setTimeout(() => {
+            document.getElementById('success-message').classList.remove('hidden');
+            
+            // Reset after 3 seconds
+            setTimeout(() => {
+                resetWizard();
+            }, 3000);
+        }, 2000);
+    }
+    
+    function resetWizard() {
+        currentStep = 1;
+        selectedReportType = null;
+        selectedExportFormat = null;
+        selectedSchedule = 'once';
+        selectedMetrics = [];
+        selectedFilters = [];
+        
+        // Reset form elements
+        document.querySelectorAll('.report-type-card, .export-format-card, .schedule-option-card').forEach(card => {
+            card.classList.remove('border-blue-500', 'bg-blue-50', 'shadow-md');
+        });
+        document.querySelectorAll('.metric-checkbox, .filter-checkbox').forEach(checkbox => {
+            checkbox.checked = false;
+        });
+        document.getElementById('startDate').value = '';
+        document.getElementById('endDate').value = '';
+        document.getElementById('deliveryTime').value = '';
+        document.getElementById('timezone').value = '';
+        document.getElementById('email').value = '';
+        document.getElementById('scheduledEmail').value = '';
+        document.getElementById('schedule-details').classList.add('hidden');
+        document.getElementById('success-message').classList.add('hidden');
+        
+        updateStep();
+    }
+    
+    // Download existing reports
+    document.querySelectorAll('.download-report-btn').forEach(btn => {
+        btn.addEventListener('click', function() {
+            const reportName = this.dataset.report;
+            // Simulate download
+            alert(`Downloading ${reportName}...`);
+        });
+    });
+    
+    // Edit existing reports
+    document.querySelectorAll('.edit-report-btn').forEach(btn => {
+        btn.addEventListener('click', function() {
+            const reportName = this.dataset.report;
+            selectedReportType = 'analytics';
+            selectedExportFormat = 'PDF';
+            currentStep = 2;
+            updateStep();
+        });
+    });
+    
+    // Initialize
+    updateStep();
+});
+</script>
+{% endblock %}

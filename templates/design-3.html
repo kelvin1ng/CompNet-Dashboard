@@ -1,0 +1,238 @@
+{% extends "base.html" %}
+
+{% block title %}Design 3 - CompNet{% endblock %}
+
+{% block content %}
+<div class="max-w-7xl mx-auto">
+    <div class="mb-8">
+        <h1 class="text-2xl font-bold text-gray-900 mb-2">Data Analytics Center</h1>
+        <p class="text-gray-600">Comprehensive data analysis with detailed insights</p>
+    </div>
+
+    <!-- Summary Section -->
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8">
+        <div class="card hover-card">
+            <div class="flex flex-row items-center justify-between space-y-0 pb-2 p-6">
+                <h3 class="text-sm font-medium text-gray-600">Total Users</h3>
+                <i data-lucide="users" class="h-4 w-4 text-blue-600"></i>
+            </div>
+            <div class="card-content">
+                <div class="text-2xl font-bold text-gray-900 mb-3">1,234</div>
+                <div class="h-16 bg-gradient-to-r from-blue-50 to-purple-50 rounded border-2 border-dashed border-gray-200 flex items-center justify-center">
+                    <span class="text-xs text-gray-500">pie preview</span>
+                </div>
+            </div>
+        </div>
+
+        <div class="card hover-card">
+            <div class="flex flex-row items-center justify-between space-y-0 pb-2 p-6">
+                <h3 class="text-sm font-medium text-gray-600">Active Sessions</h3>
+                <i data-lucide="activity" class="h-4 w-4 text-blue-600"></i>
+            </div>
+            <div class="card-content">
+                <div class="text-2xl font-bold text-gray-900 mb-3">567</div>
+                <div class="h-16 bg-gradient-to-r from-blue-50 to-purple-50 rounded border-2 border-dashed border-gray-200 flex items-center justify-center">
+                    <span class="text-xs text-gray-500">bar preview</span>
+                </div>
+            </div>
+        </div>
+
+        <div class="card hover-card">
+            <div class="flex flex-row items-center justify-between space-y-0 pb-2 p-6">
+                <h3 class="text-sm font-medium text-gray-600">Page Views</h3>
+                <i data-lucide="pie-chart" class="h-4 w-4 text-blue-600"></i>
+            </div>
+            <div class="card-content">
+                <div class="text-2xl font-bold text-gray-900 mb-3">8,901</div>
+                <div class="h-16 bg-gradient-to-r from-blue-50 to-purple-50 rounded border-2 border-dashed border-gray-200 flex items-center justify-center">
+                    <span class="text-xs text-gray-500">line preview</span>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Trends Section -->
+    <div class="card mb-8">
+        <div class="card-header">
+            <div class="flex items-center justify-between">
+                <div>
+                    <h3 class="card-title">Performance Trends</h3>
+                    <p class="card-description">Monitor key metrics and their trends over time</p>
+                </div>
+                <select class="px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 w-48">
+                    <option value="sessions" selected>Active Sessions</option>
+                    <option value="users">Total Users</option>
+                    <option value="pageviews">Page Views</option>
+                    <option value="conversions">Conversions</option>
+                </select>
+            </div>
+        </div>
+        <div class="card-content">
+            <div class="h-64 bg-gradient-to-r from-blue-50 via-green-50 to-purple-50 rounded-lg flex items-center justify-center border-2 border-dashed border-gray-300">
+                <div class="text-center">
+                    <i data-lucide="activity" class="h-12 w-12 text-gray-400 mx-auto mb-4"></i>
+                    <p class="text-gray-600 font-medium">Interactive Trend Visualization</p>
+                    <p class="text-sm text-gray-500 mt-1">Real-time metric trends with selectable time ranges</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Detailed Data Table -->
+    <div class="card">
+        <div class="card-header">
+            <div class="flex items-center justify-between">
+                <div>
+                    <h3 class="card-title">User Activity Log</h3>
+                    <p class="card-description">Detailed breakdown of user interactions and behaviors</p>
+                </div>
+                <div class="flex items-center gap-2">
+                    <button class="btn btn-outline">
+                        <i data-lucide="download" class="h-4 w-4 mr-2"></i>
+                        CSV
+                    </button>
+                    <button class="btn btn-outline">
+                        <i data-lucide="file-text" class="h-4 w-4 mr-2"></i>
+                        PDF
+                    </button>
+                    <button class="btn btn-outline">
+                        <i data-lucide="calendar" class="h-4 w-4 mr-2"></i>
+                        Excel
+                    </button>
+                </div>
+            </div>
+        </div>
+        <div class="card-content">
+            <!-- Filters -->
+            <div class="flex items-center gap-4 mb-6">
+                <div class="relative flex-1 max-w-sm">
+                    <i data-lucide="search" class="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400 h-4 w-4"></i>
+                    <input type="text" placeholder="Search activities..." class="pl-10 w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500">
+                </div>
+                <select class="px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 w-32">
+                    <option value="all" selected>All Actions</option>
+                    <option value="pageview">Page Views</option>
+                    <option value="click">Clicks</option>
+                    <option value="form">Form Submits</option>
+                </select>
+                <select class="px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 w-32">
+                    <option value="all-devices" selected>All Devices</option>
+                    <option value="desktop">Desktop</option>
+                    <option value="mobile">Mobile</option>
+                    <option value="tablet">Tablet</option>
+                </select>
+                <button class="btn btn-outline">
+                    <i data-lucide="filter" class="h-4 w-4 mr-2"></i>
+                    More Filters
+                </button>
+            </div>
+
+            <!-- Data Table -->
+            <div class="border rounded-lg overflow-hidden">
+                <table class="w-full">
+                    <thead class="bg-gray-50">
+                        <tr>
+                            <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                                <button class="flex items-center gap-2 font-semibold">
+                                    Timestamp
+                                    <i data-lucide="arrow-up-down" class="h-4 w-4"></i>
+                                </button>
+                            </th>
+                            <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                                <button class="flex items-center gap-2 font-semibold">
+                                    User ID
+                                    <i data-lucide="arrow-up-down" class="h-4 w-4"></i>
+                                </button>
+                            </th>
+                            <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider font-semibold">Action</th>
+                            <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider font-semibold">Page</th>
+                            <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider font-semibold">Duration</th>
+                            <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider font-semibold">Device</th>
+                        </tr>
+                    </thead>
+                    <tbody class="bg-white divide-y divide-gray-200">
+                        <tr class="bg-white">
+                            <td class="px-6 py-4 whitespace-nowrap text-sm font-mono">2025-01-03 14:30:15</td>
+                            <td class="px-6 py-4 whitespace-nowrap text-sm font-medium">USR001</td>
+                            <td class="px-6 py-4 whitespace-nowrap">
+                                <span class="badge badge-info">Page View</span>
+                            </td>
+                            <td class="px-6 py-4 whitespace-nowrap text-sm text-blue-600 hover:underline cursor-pointer">/dashboard</td>
+                            <td class="px-6 py-4 whitespace-nowrap text-sm font-mono">2:45</td>
+                            <td class="px-6 py-4 whitespace-nowrap">
+                                <span class="inline-flex items-center px-2 py-1 rounded-full text-xs font-medium bg-blue-100 text-blue-800">Desktop</span>
+                            </td>
+                        </tr>
+                        <tr class="bg-gray-50">
+                            <td class="px-6 py-4 whitespace-nowrap text-sm font-mono">2025-01-03 14:28:32</td>
+                            <td class="px-6 py-4 whitespace-nowrap text-sm font-medium">USR002</td>
+                            <td class="px-6 py-4 whitespace-nowrap">
+                                <span class="badge badge-info">Click</span>
+                            </td>
+                            <td class="px-6 py-4 whitespace-nowrap text-sm text-blue-600 hover:underline cursor-pointer">/analytics</td>
+                            <td class="px-6 py-4 whitespace-nowrap text-sm font-mono">0:15</td>
+                            <td class="px-6 py-4 whitespace-nowrap">
+                                <span class="inline-flex items-center px-2 py-1 rounded-full text-xs font-medium bg-green-100 text-green-800">Mobile</span>
+                            </td>
+                        </tr>
+                        <tr class="bg-white">
+                            <td class="px-6 py-4 whitespace-nowrap text-sm font-mono">2025-01-03 14:25:18</td>
+                            <td class="px-6 py-4 whitespace-nowrap text-sm font-medium">USR003</td>
+                            <td class="px-6 py-4 whitespace-nowrap">
+                                <span class="badge badge-error">Form Submit</span>
+                            </td>
+                            <td class="px-6 py-4 whitespace-nowrap text-sm text-blue-600 hover:underline cursor-pointer">/contact</td>
+                            <td class="px-6 py-4 whitespace-nowrap text-sm font-mono">5:20</td>
+                            <td class="px-6 py-4 whitespace-nowrap">
+                                <span class="inline-flex items-center px-2 py-1 rounded-full text-xs font-medium bg-purple-100 text-purple-800">Tablet</span>
+                            </td>
+                        </tr>
+                        <tr class="bg-gray-50">
+                            <td class="px-6 py-4 whitespace-nowrap text-sm font-mono">2025-01-03 14:22:45</td>
+                            <td class="px-6 py-4 whitespace-nowrap text-sm font-medium">USR001</td>
+                            <td class="px-6 py-4 whitespace-nowrap">
+                                <span class="badge badge-info">Page View</span>
+                            </td>
+                            <td class="px-6 py-4 whitespace-nowrap text-sm text-blue-600 hover:underline cursor-pointer">/reports</td>
+                            <td class="px-6 py-4 whitespace-nowrap text-sm font-mono">3:12</td>
+                            <td class="px-6 py-4 whitespace-nowrap">
+                                <span class="inline-flex items-center px-2 py-1 rounded-full text-xs font-medium bg-blue-100 text-blue-800">Desktop</span>
+                            </td>
+                        </tr>
+                        <tr class="bg-white">
+                            <td class="px-6 py-4 whitespace-nowrap text-sm font-mono">2025-01-03 14:20:03</td>
+                            <td class="px-6 py-4 whitespace-nowrap text-sm font-medium">USR004</td>
+                            <td class="px-6 py-4 whitespace-nowrap">
+                                <span class="badge badge-success">Download</span>
+                            </td>
+                            <td class="px-6 py-4 whitespace-nowrap text-sm text-blue-600 hover:underline cursor-pointer">/resources</td>
+                            <td class="px-6 py-4 whitespace-nowrap text-sm font-mono">1:30</td>
+                            <td class="px-6 py-4 whitespace-nowrap">
+                                <span class="inline-flex items-center px-2 py-1 rounded-full text-xs font-medium bg-blue-100 text-blue-800">Desktop</span>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <!-- Pagination -->
+            <div class="flex items-center justify-between mt-4">
+                <p class="text-sm text-gray-600">Showing 1 to 5 of 1,234 results</p>
+                <div class="flex items-center gap-2">
+                    <button class="btn btn-outline" disabled>Previous</button>
+                    <button class="btn btn-primary">1</button>
+                    <button class="btn btn-outline">2</button>
+                    <button class="btn btn-outline">3</button>
+                    <button class="btn btn-outline">Next</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    lucide.createIcons();
+});
+</script>
+{% endblock %}

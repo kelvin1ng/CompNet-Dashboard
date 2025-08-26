@@ -1,0 +1,344 @@
+{% extends "base.html" %}
+
+{% block title %}Design 2 - CompNet{% endblock %}
+
+{% block content %}
+<div class="max-w-7xl mx-auto">
+    <div class="mb-8">
+        <h1 class="text-2xl font-bold text-gray-900 mb-2">Analytics Dashboard</h1>
+        <p class="text-gray-600">Comprehensive analytics with organized data views</p>
+    </div>
+
+    <!-- Top Metrics Row -->
+    <div class="metrics-grid mb-8">
+        <div class="card hover-card">
+            <div class="card-content p-4">
+                <div class="flex items-center justify-between">
+                    <div>
+                        <p class="text-sm text-gray-600 mb-1">Total Users</p>
+                        <p class="text-2xl font-bold text-blue-600">1,234</p>
+                        <div class="flex items-center gap-1 mt-1">
+                            <i data-lucide="trending-up" class="h-3 w-3 text-green-600"></i>
+                            <span class="text-xs text-green-600">+12.5%</span>
+                        </div>
+                    </div>
+                    <div class="p-2 bg-blue-50 rounded-lg">
+                        <i data-lucide="users" class="h-5 w-5 text-blue-600"></i>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="card hover-card">
+            <div class="card-content p-4">
+                <div class="flex items-center justify-between">
+                    <div>
+                        <p class="text-sm text-gray-600 mb-1">Active Sessions</p>
+                        <p class="text-2xl font-bold text-blue-600">567</p>
+                        <div class="flex items-center gap-1 mt-1">
+                            <i data-lucide="trending-up" class="h-3 w-3 text-green-600"></i>
+                            <span class="text-xs text-green-600">+8.2%</span>
+                        </div>
+                    </div>
+                    <div class="p-2 bg-blue-50 rounded-lg">
+                        <i data-lucide="activity" class="h-5 w-5 text-blue-600"></i>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="card hover-card">
+            <div class="card-content p-4">
+                <div class="flex items-center justify-between">
+                    <div>
+                        <p class="text-sm text-gray-600 mb-1">Avg. Session</p>
+                        <p class="text-2xl font-bold text-blue-600">4:32</p>
+                        <div class="flex items-center gap-1 mt-1">
+                            <i data-lucide="trending-up" class="h-3 w-3 text-green-600"></i>
+                            <span class="text-xs text-green-600">+2.1%</span>
+                        </div>
+                    </div>
+                    <div class="p-2 bg-blue-50 rounded-lg">
+                        <i data-lucide="clock" class="h-5 w-5 text-blue-600"></i>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="card hover-card">
+            <div class="card-content p-4">
+                <div class="flex items-center justify-between">
+                    <div>
+                        <p class="text-sm text-gray-600 mb-1">Conversion Rate</p>
+                        <p class="text-2xl font-bold text-blue-600">3.4%</p>
+                        <div class="flex items-center gap-1 mt-1">
+                            <i data-lucide="trending-up" class="h-3 w-3 text-green-600"></i>
+                            <span class="text-xs text-green-600">+0.8%</span>
+                        </div>
+                    </div>
+                    <div class="p-2 bg-blue-50 rounded-lg">
+                        <i data-lucide="trending-up" class="h-5 w-5 text-blue-600"></i>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Tabbed Interface -->
+    <div class="tabs">
+        <div class="tabs-list">
+            <button class="tabs-trigger bg-white text-gray-900 shadow-sm" data-tab-trigger="behavior">
+                <i data-lucide="mouse-pointer" class="h-4 w-4"></i>
+                User Behavior
+            </button>
+            <button class="tabs-trigger" data-tab-trigger="performance">
+                <i data-lucide="zap" class="h-4 w-4"></i>
+                Performance
+            </button>
+            <button class="tabs-trigger" data-tab-trigger="reports">
+                <i data-lucide="plus" class="h-4 w-4"></i>
+                Custom Reports
+            </button>
+        </div>
+
+        <!-- User Behavior Tab -->
+        <div class="tabs-content" data-tab-content="behavior">
+            <div class="dashboard-grid">
+                <div class="card">
+                    <div class="card-header">
+                        <h3 class="card-title">User Flow Analysis</h3>
+                        <p class="card-description">Track how users navigate through your application</p>
+                    </div>
+                    <div class="card-content">
+                        <div class="h-48 bg-gradient-to-br from-blue-50 to-purple-50 rounded-lg flex items-center justify-center border-2 border-dashed border-gray-300">
+                            <div class="text-center">
+                                <i data-lucide="mouse-pointer" class="h-10 w-10 text-gray-400 mx-auto mb-3"></i>
+                                <p class="text-gray-600 font-medium">Funnel Visualization</p>
+                                <p class="text-sm text-gray-500 mt-1">Interactive user flow diagram</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="card">
+                    <div class="card-header">
+                        <h3 class="card-title">Heatmap Preview</h3>
+                        <p class="card-description">Visual representation of user interactions</p>
+                    </div>
+                    <div class="card-content">
+                        <div class="h-48 bg-gradient-to-br from-red-50 to-orange-50 rounded-lg flex items-center justify-center border-2 border-dashed border-gray-300">
+                            <div class="text-center">
+                                <i data-lucide="activity" class="h-10 w-10 text-gray-400 mx-auto mb-3"></i>
+                                <p class="text-gray-600 font-medium">Click Heatmap</p>
+                                <p class="text-sm text-gray-500 mt-1">User interaction hotspots</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="card">
+                <div class="card-header">
+                    <h3 class="card-title">Page Performance Metrics</h3>
+                </div>
+                <div class="card-content">
+                    <div class="space-y-4">
+                        <div class="flex items-center justify-between p-3 bg-gray-50 rounded-lg">
+                            <span class="font-medium text-gray-900">Homepage</span>
+                            <div class="flex items-center gap-4 text-sm">
+                                <div class="text-center">
+                                    <p class="text-gray-500">Bounce Rate</p>
+                                    <p class="font-medium">32%</p>
+                                </div>
+                                <div class="text-center">
+                                    <p class="text-gray-500">Avg Time</p>
+                                    <p class="font-medium">2:45</p>
+                                </div>
+                                <div class="text-center">
+                                    <p class="text-gray-500">Exit Rate</p>
+                                    <p class="font-medium">28%</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="flex items-center justify-between p-3 bg-gray-50 rounded-lg">
+                            <span class="font-medium text-gray-900">Product Page</span>
+                            <div class="flex items-center gap-4 text-sm">
+                                <div class="text-center">
+                                    <p class="text-gray-500">Bounce Rate</p>
+                                    <p class="font-medium">45%</p>
+                                </div>
+                                <div class="text-center">
+                                    <p class="text-gray-500">Avg Time</p>
+                                    <p class="font-medium">3:12</p>
+                                </div>
+                                <div class="text-center">
+                                    <p class="text-gray-500">Exit Rate</p>
+                                    <p class="font-medium">35%</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="flex items-center justify-between p-3 bg-gray-50 rounded-lg">
+                            <span class="font-medium text-gray-900">Checkout</span>
+                            <div class="flex items-center gap-4 text-sm">
+                                <div class="text-center">
+                                    <p class="text-gray-500">Bounce Rate</p>
+                                    <p class="font-medium">15%</p>
+                                </div>
+                                <div class="text-center">
+                                    <p class="text-gray-500">Avg Time</p>
+                                    <p class="font-medium">1:30</p>
+                                </div>
+                                <div class="text-center">
+                                    <p class="text-gray-500">Exit Rate</p>
+                                    <p class="font-medium">12%</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="flex items-center justify-between p-3 bg-gray-50 rounded-lg">
+                            <span class="font-medium text-gray-900">Contact</span>
+                            <div class="flex items-center gap-4 text-sm">
+                                <div class="text-center">
+                                    <p class="text-gray-500">Bounce Rate</p>
+                                    <p class="font-medium">55%</p>
+                                </div>
+                                <div class="text-center">
+                                    <p class="text-gray-500">Avg Time</p>
+                                    <p class="font-medium">1:15</p>
+                                </div>
+                                <div class="text-center">
+                                    <p class="text-gray-500">Exit Rate</p>
+                                    <p class="font-medium">48%</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Performance Tab -->
+        <div class="tabs-content hidden" data-tab-content="performance">
+            <div class="grid grid-cols-1 lg:grid-cols-3 gap-6 mb-6">
+                <div class="card">
+                    <div class="card-header">
+                        <h3 class="card-title text-lg">Server Response</h3>
+                    </div>
+                    <div class="card-content">
+                        <div class="text-center">
+                            <div class="text-3xl font-bold text-green-600 mb-2">245ms</div>
+                            <p class="text-sm text-gray-600">Average response time</p>
+                            <span class="badge badge-success mt-2">Excellent</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="card">
+                    <div class="card-header">
+                        <h3 class="card-title text-lg">Page Load Speed</h3>
+                    </div>
+                    <div class="card-content">
+                        <div class="text-center">
+                            <div class="text-3xl font-bold text-blue-600 mb-2">1.2s</div>
+                            <p class="text-sm text-gray-600">Average load time</p>
+                            <span class="badge badge-info mt-2">Good</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="card">
+                    <div class="card-header">
+                        <h3 class="card-title text-lg">Uptime</h3>
+                    </div>
+                    <div class="card-content">
+                        <div class="text-center">
+                            <div class="text-3xl font-bold text-green-600 mb-2">99.9%</div>
+                            <p class="text-sm text-gray-600">Last 30 days</p>
+                            <span class="badge badge-success mt-2">Excellent</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="card">
+                <div class="card-header">
+                    <h3 class="card-title">System Performance Timeline</h3>
+                    <p class="card-description">Monitor system metrics over time</p>
+                </div>
+                <div class="card-content">
+                    <div class="h-64 bg-gradient-to-r from-green-50 to-blue-50 rounded-lg flex items-center justify-center border-2 border-dashed border-gray-300">
+                        <div class="text-center">
+                            <i data-lucide="zap" class="h-12 w-12 text-gray-400 mx-auto mb-4"></i>
+                            <p class="text-gray-600 font-medium">Performance Chart</p>
+                            <p class="text-sm text-gray-500 mt-1">Real-time system metrics visualization</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Custom Reports Tab -->
+        <div class="tabs-content hidden" data-tab-content="reports">
+            <div class="card mb-6">
+                <div class="card-header">
+                    <h3 class="card-title">Custom Report Builder</h3>
+                    <p class="card-description">Create personalized reports with your preferred metrics</p>
+                </div>
+                <div class="card-content">
+                    <div class="text-center py-12">
+                        <i data-lucide="plus" class="h-16 w-16 text-gray-300 mx-auto mb-4"></i>
+                        <h3 class="text-lg font-medium text-gray-900 mb-2">Create Your First Report</h3>
+                        <p class="text-gray-600 mb-6 max-w-md mx-auto">
+                            Build custom reports by selecting metrics, date ranges, and visualization types
+                        </p>
+                        <button class="btn btn-primary">
+                            <i data-lucide="plus" class="h-4 w-4 mr-2"></i>
+                            Add New Report
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <div class="reports-grid">
+                <div class="card hover-card">
+                    <div class="card-content p-4">
+                        <div class="flex items-center justify-between mb-2">
+                            <h4 class="font-medium text-gray-900">Weekly Summary</h4>
+                            <span class="badge badge-success">Active</span>
+                        </div>
+                        <p class="text-sm text-gray-600 mb-3">Automated Report</p>
+                        <button class="btn btn-outline w-full">View Report</button>
+                    </div>
+                </div>
+
+                <div class="card hover-card">
+                    <div class="card-content p-4">
+                        <div class="flex items-center justify-between mb-2">
+                            <h4 class="font-medium text-gray-900">User Engagement</h4>
+                            <span class="badge badge-info">Draft</span>
+                        </div>
+                        <p class="text-sm text-gray-600 mb-3">Custom Report</p>
+                        <button class="btn btn-outline w-full">View Report</button>
+                    </div>
+                </div>
+
+                <div class="card hover-card">
+                    <div class="card-content p-4">
+                        <div class="flex items-center justify-between mb-2">
+                            <h4 class="font-medium text-gray-900">Revenue Analysis</h4>
+                            <span class="badge badge-success">Active</span>
+                        </div>
+                        <p class="text-sm text-gray-600 mb-3">Scheduled Report</p>
+                        <button class="btn btn-outline w-full">View Report</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    lucide.createIcons();
+});
+</script>
+{% endblock %}

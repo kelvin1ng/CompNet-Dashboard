@@ -1,0 +1,496 @@
+{% extends "base.html" %}
+
+{% block title %}Dashboard - CompNet{% endblock %}
+
+{% block content %}
+<div class="max-w-7xl mx-auto">
+    <div class="mb-8">
+        <h1 class="text-2xl font-bold text-gray-900 mb-2">Student System Analytics</h1>
+        <p class="text-gray-600">Master of Computer Networks Program - Toronto Metropolitan University</p>
+    </div>
+
+    <!-- Top Metrics Row -->
+    <div class="metrics-grid mb-8">
+        {% for metric in top_metrics %}
+        <div class="card hover-card" data-metric="{{ loop.index0 }}">
+            <div class="card-content p-4">
+                <div class="flex items-center justify-between">
+                    <div>
+                        <p class="text-sm text-gray-600 mb-1">{{ metric.label }}</p>
+                        <p class="text-2xl font-bold text-blue-600 metric-value">{{ metric.value }}</p>
+                        <div class="flex items-center gap-1 mt-1">
+                            <i data-lucide="trending-up" class="h-3 w-3 text-green-600"></i>
+                            <span class="text-xs text-green-600 metric-trend">{{ metric.trend }}</span>
+                        </div>
+                    </div>
+                    <div class="p-2 bg-blue-50 rounded-lg">
+                        <i data-lucide="{{ metric.icon }}" class="h-5 w-5 text-blue-600"></i>
+                    </div>
+                </div>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+
+    <!-- Tabbed Interface -->
+    <div class="tabs">
+        <div class="tabs-list">
+            <button class="tabs-trigger bg-white text-gray-900 shadow-sm" data-tab-trigger="student-activity">
+                <i data-lucide="graduation-cap" class="h-4 w-4"></i>
+                Student Activity
+            </button>
+            <button class="tabs-trigger" data-tab-trigger="system-performance">
+                <i data-lucide="server" class="h-4 w-4"></i>
+                System Performance
+            </button>
+            <button class="tabs-trigger" data-tab-trigger="academic-reports">
+                <i data-lucide="file-text" class="h-4 w-4"></i>
+                Academic Reports
+            </button>
+        </div>
+
+        <!-- Student Activity Tab -->
+        <div class="tabs-content" data-tab-content="student-activity">
+            <div class="dashboard-grid">
+                <!-- User Journey Flow Chart -->
+                <div class="card">
+                    <div class="card-header">
+                        <h3 class="card-title">User Journey Flow</h3>
+                        <p class="card-description">Visual flow of student navigation patterns through system services</p>
+                    </div>
+                    <div class="card-content">
+                        <div class="chart-container">
+                            <canvas id="user-journey-chart"></canvas>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Activity Heatmap -->
+                <div class="card">
+                    <div class="card-header">
+                        <h3 class="card-title">Activity Heatmap</h3>
+                        <p class="card-description">Student activity patterns by time and day</p>
+                    </div>
+                    <div class="card-content">
+                        <div class="chart-container">
+                            <canvas id="activity-heatmap-chart"></canvas>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="dashboard-grid">
+                <!-- Recent User Actions -->
+                <div class="card">
+                    <div class="card-header">
+                        <h3 class="card-title">Recent User Actions</h3>
+                        <p class="card-description">Live feed of student system interactions</p>
+                    </div>
+                    <div class="card-content">
+                        <div class="space-y-3 max-h-64 overflow-y-auto">
+                            {% for activity in recent_actions %}
+                            <div class="flex items-center justify-between p-3 bg-gray-50 rounded-lg">
+                                <div class="flex items-center gap-3">
+                                    <div class="status-dot 
+                                        {% if activity.status == 'success' %}status-healthy
+                                        {% elif activity.status == 'warning' %}status-warning
+                                        {% else %}status-info{% endif %}"></div>
+                                    <div>
+                                        <p class="text-sm font-medium text-gray-900">{{ activity.user }}</p>
+                                        <p class="text-xs text-gray-600">{{ activity.action }} • {{ activity.service }}</p>
+                                    </div>
+                                </div>
+                                <span class="text-xs text-gray-500">{{ activity.time }}</span>
+                            </div>
+                            {% endfor %}
+                        </div>
+                    </div>
+                </div>
+
+                <!-- User Behavior Patterns -->
+                <div class="card">
+                    <div class="card-header">
+                        <h3 class="card-title">User Behavior Patterns</h3>
+                        <p class="card-description">Analysis of common student interaction patterns</p>
+                    </div>
+                    <div class="card-content">
+                        <div class="space-y-4">
+                            <div class="p-4 bg-blue-50 rounded-lg">
+                                <h4 class="font-medium text-blue-900 mb-2">Peak Usage Pattern</h4>
+                                <p class="text-sm text-blue-700">
+                                    Students are most active between 12PM-3PM on weekdays, with 67% of daily interactions
+                                    occurring during this window.
+                                </p>
+                            </div>
+                            <div class="p-4 bg-green-50 rounded-lg">
+                                <h4 class="font-medium text-green-900 mb-2">Service Preference</h4>
+                                <p class="text-sm text-green-700">
+                                    Announcements service has the highest engagement rate (73.6%), followed by OneCard
+                                    transactions (79.7% retention).
+                                </p>
+                            </div>
+                            <div class="p-4 bg-purple-50 rounded-lg">
+                                <h4 class="font-medium text-purple-900 mb-2">Session Duration</h4>
+                                <p class="text-sm text-purple-700">
+                                    Average session length is 18:45 minutes, with VM Management sessions lasting longest (45:15
+                                    avg).
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- System Performance Tab -->
+        <div class="tabs-content hidden" data-tab-content="system-performance">
+            <div class="grid grid-cols-1 lg:grid-cols-3 gap-6 mb-6">
+                <div class="card">
+                    <div class="card-header">
+                        <h3 class="card-title text-lg">API Response Time</h3>
+                    </div>
+                    <div class="card-content">
+                        <div class="text-center">
+                            <div class="text-3xl font-bold text-green-600 mb-2">185ms</div>
+                            <p class="text-sm text-gray-600">Average across all services</p>
+                            <span class="badge badge-success mt-2">Excellent</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="card">
+                    <div class="card-header">
+                        <h3 class="card-title text-lg">Message Queue</h3>
+                    </div>
+                    <div class="card-content">
+                        <div class="text-center">
+                            <div class="text-3xl font-bold text-blue-600 mb-2">0.8s</div>
+                            <p class="text-sm text-gray-600">RabbitMQ processing time</p>
+                            <span class="badge badge-info mt-2">Good</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="card">
+                    <div class="card-header">
+                        <h3 class="card-title text-lg">System Uptime</h3>
+                    </div>
+                    <div class="card-content">
+                        <div class="text-center">
+                            <div class="text-3xl font-bold text-green-600 mb-2">99.8%</div>
+                            <p class="text-sm text-gray-600">All microservices</p>
+                            <span class="badge badge-success mt-2">Excellent</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Microservices Health Monitor -->
+            <div class="card">
+                <div class="card-header">
+                    <h3 class="card-title">Microservices Health Monitor</h3>
+                    <p class="card-description">Real-time status of all system components</p>
+                </div>
+                <div class="card-content">
+                    <div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
+                        <!-- Service Status Overview -->
+                        <div class="card lg:col-span-1">
+                            <div class="card-header pb-3">
+                                <h4 class="card-title text-base">Service Status</h4>
+                            </div>
+                            <div class="card-content">
+                                <div class="chart-container h-32">
+                                    <canvas id="service-status-chart"></canvas>
+                                </div>
+                                <div class="mt-3 space-y-1">
+                                    <div class="flex items-center justify-between text-sm">
+                                        <div class="flex items-center gap-2">
+                                            <div class="w-3 h-3 rounded-full bg-green-500"></div>
+                                            <span>Healthy</span>
+                                        </div>
+                                        <span class="font-medium">7</span>
+                                    </div>
+                                    <div class="flex items-center justify-between text-sm">
+                                        <div class="flex items-center gap-2">
+                                            <div class="w-3 h-3 rounded-full bg-yellow-500"></div>
+                                            <span>Warning</span>
+                                        </div>
+                                        <span class="font-medium">1</span>
+                                    </div>
+                                    <div class="flex items-center justify-between text-sm">
+                                        <div class="flex items-center gap-2">
+                                            <div class="w-3 h-3 rounded-full bg-red-500"></div>
+                                            <span>Critical</span>
+                                        </div>
+                                        <span class="font-medium">0</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Response Time Trends -->
+                        <div class="card lg:col-span-2">
+                            <div class="card-header pb-3">
+                                <h4 class="card-title text-base">Response Time Trends (24h)</h4>
+                            </div>
+                            <div class="card-content">
+                                <div class="chart-container h-32">
+                                    <canvas id="response-time-chart"></canvas>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Detailed Service Status -->
+                    <div class="mt-6">
+                        <h4 class="text-sm font-medium text-gray-900 mb-3">Service Details</h4>
+                        <div class="space-y-3">
+                            {% for service in microservices_health %}
+                            <div class="flex items-center justify-between p-3 bg-white rounded-lg border">
+                                <div class="flex items-center gap-3">
+                                    {% if service.status == 'healthy' %}
+                                        <i data-lucide="check-circle" class="h-4 w-4 text-green-600"></i>
+                                    {% elif service.status == 'warning' %}
+                                        <i data-lucide="alert-circle" class="h-4 w-4 text-yellow-600"></i>
+                                    {% else %}
+                                        <i data-lucide="x-circle" class="h-4 w-4 text-red-600"></i>
+                                    {% endif %}
+                                    <div>
+                                        <p class="font-medium text-gray-900">{{ service.name }}</p>
+                                        <span class="badge text-xs 
+                                            {% if service.status == 'healthy' %}badge-success
+                                            {% elif service.status == 'warning' %}badge-warning
+                                            {% else %}badge-error{% endif %}">
+                                            {{ service.status.title() }}
+                                        </span>
+                                    </div>
+                                </div>
+                                <div class="flex items-center gap-6 text-sm">
+                                    <div class="text-center">
+                                        <p class="text-gray-500">Uptime</p>
+                                        <p class="font-medium">{{ service.uptime }}%</p>
+                                    </div>
+                                    <div class="text-center">
+                                        <p class="text-gray-500">Response</p>
+                                        <p class="font-medium">{{ service.responseTime }}ms</p>
+                                    </div>
+                                    <div class="text-center">
+                                        <p class="text-gray-500">Requests/h</p>
+                                        <p class="font-medium">{{ "{:,}".format(service.requests) }}</p>
+                                    </div>
+                                </div>
+                            </div>
+                            {% endfor %}
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Academic Reports Tab -->
+        <div class="tabs-content hidden" data-tab-content="academic-reports">
+            <div class="card mb-6">
+                <div class="card-header">
+                    <h3 class="card-title">Academic Report Builder</h3>
+                    <p class="card-description">Generate custom reports for student performance and system usage</p>
+                </div>
+                <div class="card-content">
+                    <div class="text-center py-12">
+                        <i data-lucide="file-text" class="h-16 w-16 text-gray-300 mx-auto mb-4"></i>
+                        <h3 class="text-lg font-medium text-gray-900 mb-2">Create Academic Report</h3>
+                        <p class="text-gray-600 mb-6 max-w-md mx-auto">
+                            Build reports for student engagement, exam analytics, system usage, and course performance
+                        </p>
+                        <a href="{{ url_for('reports') }}" class="btn btn-primary">
+                            <i data-lucide="plus" class="h-4 w-4 mr-2"></i>
+                            New Academic Report
+                        </a>
+                    </div>
+                </div>
+            </div>
+
+            <div class="reports-grid">
+                {% for report in academic_reports %}
+                <div class="card hover-card">
+                    <div class="card-content p-4">
+                        <div class="flex items-center justify-between mb-2">
+                            <h4 class="font-medium text-gray-900">{{ report.name }}</h4>
+                            <span class="badge {% if report.status == 'Active' %}badge-success{% else %}badge-info{% endif %}">
+                                {{ report.status }}
+                            </span>
+                        </div>
+                        <p class="text-sm text-gray-600 mb-3">{{ report.type }} Report</p>
+                        <button class="btn btn-outline w-full">View Report</button>
+                    </div>
+                </div>
+                {% endfor %}
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
+
+{% block scripts %}
+<script>
+// Dashboard data from Flask
+const dashboardData = {
+    userJourneyData: {{ user_journey_data | tojson }},
+    heatmapData: {{ heatmap_data | tojson }},
+    responseTimeData: {{ response_time_data | tojson }}
+};
+
+// Initialize charts when page loads
+document.addEventListener('DOMContentLoaded', function() {
+    initializeDashboardCharts();
+    lucide.createIcons();
+});
+
+function initializeDashboardCharts() {
+    // User Journey Flow Chart
+    const userJourneyChart = window.dashboardUtils.createBarChart('user-journey-chart', {
+        labels: dashboardData.userJourneyData.map(d => d.service),
+        datasets: [
+            {
+                label: 'Entry Points',
+                data: dashboardData.userJourneyData.map(d => d.entry),
+                backgroundColor: 'hsl(217, 91%, 60%)',
+                borderRadius: 4
+            },
+            {
+                label: 'Exit Points',
+                data: dashboardData.userJourneyData.map(d => d.exit),
+                backgroundColor: 'hsl(142, 76%, 36%)',
+                borderRadius: 4
+            }
+        ]
+    });
+
+    // Activity Heatmap Chart
+    const heatmapChart = window.dashboardUtils.createBarChart('activity-heatmap-chart', {
+        labels: dashboardData.heatmapData.map(d => d.hour),
+        datasets: [
+            {
+                label: 'Monday',
+                data: dashboardData.heatmapData.map(d => d.Mon),
+                backgroundColor: 'hsl(217, 91%, 60%)',
+                stack: 'Stack 0'
+            },
+            {
+                label: 'Tuesday',
+                data: dashboardData.heatmapData.map(d => d.Tue),
+                backgroundColor: 'hsl(262, 83%, 58%)',
+                stack: 'Stack 0'
+            },
+            {
+                label: 'Wednesday',
+                data: dashboardData.heatmapData.map(d => d.Wed),
+                backgroundColor: 'hsl(142, 76%, 36%)',
+                stack: 'Stack 0'
+            },
+            {
+                label: 'Thursday',
+                data: dashboardData.heatmapData.map(d => d.Thu),
+                backgroundColor: 'hsl(38, 92%, 50%)',
+                stack: 'Stack 0'
+            },
+            {
+                label: 'Friday',
+                data: dashboardData.heatmapData.map(d => d.Fri),
+                backgroundColor: 'hsl(346, 87%, 43%)',
+                stack: 'Stack 0'
+            },
+            {
+                label: 'Saturday',
+                data: dashboardData.heatmapData.map(d => d.Sat),
+                backgroundColor: 'hsl(24, 95%, 53%)',
+                stack: 'Stack 0'
+            },
+            {
+                label: 'Sunday',
+                data: dashboardData.heatmapData.map(d => d.Sun),
+                backgroundColor: 'hsl(12, 76%, 61%)',
+                stack: 'Stack 0'
+            }
+        ]
+    }, { scales: { x: { stacked: true }, y: { stacked: true } } });
+
+    // Service Status Pie Chart
+    const serviceStatusChart = new Chart(document.getElementById('service-status-chart'), {
+        type: 'pie',
+        data: {
+            labels: ['Healthy', 'Warning', 'Critical'],
+            datasets: [{
+                data: [7, 1, 0],
+                backgroundColor: ['#10b981', '#f59e0b', '#ef4444']
+            }]
+        },
+        options: {
+            responsive: true,
+            maintainAspectRatio: false,
+            plugins: {
+                legend: {
+                    display: false
+                }
+            }
+        }
+    });
+
+    // Response Time Line Chart
+    const responseTimeChart = window.dashboardUtils.createLineChart('response-time-chart', {
+        labels: dashboardData.responseTimeData.map(d => d.time),
+        datasets: [
+            {
+                label: 'Dashboard',
+                data: dashboardData.responseTimeData.map(d => d.dashboard),
+                borderColor: '#3b82f6',
+                backgroundColor: '#3b82f6',
+                tension: 0.4
+            },
+            {
+                label: 'VM Management',
+                data: dashboardData.responseTimeData.map(d => d.vm),
+                borderColor: '#10b981',
+                backgroundColor: '#10b981',
+                tension: 0.4
+            },
+            {
+                label: 'Email Service',
+                data: dashboardData.responseTimeData.map(d => d.email),
+                borderColor: '#f59e0b',
+                backgroundColor: '#f59e0b',
+                tension: 0.4
+            },
+            {
+                label: 'Exam System',
+                data: dashboardData.responseTimeData.map(d => d.exam),
+                borderColor: '#ef4444',
+                backgroundColor: '#ef4444',
+                tension: 0.4
+            },
+            {
+                label: 'Announcements',
+                data: dashboardData.responseTimeData.map(d => d.announcement),
+                borderColor: '#8b5cf6',
+                backgroundColor: '#8b5cf6',
+                tension: 0.4
+            }
+        ]
+    }, { 
+        scales: { 
+            y: { 
+                beginAtZero: true,
+                title: {
+                    display: true,
+                    text: 'Response Time (ms)'
+                }
+            } 
+        },
+        plugins: {
+            legend: {
+                display: false
+            }
+        }
+    });
+}
+</script>
+{% endblock %}

@@ -1,0 +1,186 @@
+{% extends "base.html" %}
+
+{% block title %}Design 1 - CompNet{% endblock %}
+
+{% block content %}
+<div class="max-w-7xl mx-auto">
+    <div class="mb-8">
+        <h1 class="text-2xl font-bold text-gray-900 mb-2">Dashboard Overview</h1>
+        <p class="text-gray-600">Monitor your web analytics in real-time</p>
+    </div>
+
+    <!-- Key Metrics Cards -->
+    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mb-8">
+        <div class="card hover-card cursor-pointer hover:border-blue-300">
+            <div class="flex flex-row items-center justify-between space-y-0 pb-2 p-6">
+                <h3 class="text-sm font-medium text-gray-600">Total Users</h3>
+                <div class="p-2 rounded-lg bg-blue-50">
+                    <i data-lucide="users" class="h-4 w-4 text-blue-600"></i>
+                </div>
+            </div>
+            <div class="card-content">
+                <div class="text-2xl font-bold text-gray-900 mb-1">1,234</div>
+                <div class="flex items-center gap-1">
+                    <i data-lucide="trending-up" class="h-4 w-4 text-green-600"></i>
+                    <span class="text-sm text-green-600">+12.5%</span>
+                </div>
+            </div>
+        </div>
+
+        <div class="card hover-card cursor-pointer hover:border-blue-300">
+            <div class="flex flex-row items-center justify-between space-y-0 pb-2 p-6">
+                <h3 class="text-sm font-medium text-gray-600">Active Sessions</h3>
+                <div class="p-2 rounded-lg bg-green-50">
+                    <i data-lucide="activity" class="h-4 w-4 text-green-600"></i>
+                </div>
+            </div>
+            <div class="card-content">
+                <div class="text-2xl font-bold text-gray-900 mb-1">567</div>
+                <div class="flex items-center gap-1">
+                    <i data-lucide="trending-up" class="h-4 w-4 text-green-600"></i>
+                    <span class="text-sm text-green-600">+8.2%</span>
+                </div>
+            </div>
+        </div>
+
+        <div class="card hover-card cursor-pointer hover:border-blue-300">
+            <div class="flex flex-row items-center justify-between space-y-0 pb-2 p-6">
+                <h3 class="text-sm font-medium text-gray-600">System Health</h3>
+                <div class="p-2 rounded-lg bg-green-50">
+                    <i data-lucide="server" class="h-4 w-4 text-green-600"></i>
+                </div>
+            </div>
+            <div class="card-content">
+                <div class="text-2xl font-bold text-gray-900 mb-1">99.9%</div>
+                <div class="flex items-center gap-1">
+                    <span class="text-sm text-gray-600">Excellent</span>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Main Analytics Card -->
+    <div class="card mb-6">
+        <div class="card-header">
+            <div class="flex items-center justify-between">
+                <div>
+                    <h3 class="card-title">User Activity Over Time</h3>
+                    <p class="card-description">Track user engagement and session patterns</p>
+                </div>
+                <div class="flex items-center gap-2">
+                    <select class="px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 w-32">
+                        <option value="1d">Last 24h</option>
+                        <option value="7d" selected>Last 7 days</option>
+                        <option value="30d">Last 30 days</option>
+                        <option value="90d">Last 90 days</option>
+                    </select>
+                    <button class="btn btn-outline">
+                        <i data-lucide="calendar" class="h-4 w-4 mr-2"></i>
+                        Custom Range
+                    </button>
+                </div>
+            </div>
+        </div>
+        <div class="card-content">
+            <div class="h-64 bg-gradient-to-r from-blue-50 to-green-50 rounded-lg flex items-center justify-center border-2 border-dashed border-gray-300">
+                <div class="text-center">
+                    <i data-lucide="activity" class="h-12 w-12 text-gray-400 mx-auto mb-4"></i>
+                    <p class="text-gray-600 font-medium">Interactive Chart Placeholder</p>
+                    <p class="text-sm text-gray-500 mt-1">Real-time user activity visualization would appear here</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Additional Cards Row -->
+    <div class="dashboard-grid">
+        <div class="card">
+            <div class="card-header">
+                <h3 class="card-title flex items-center gap-2">
+                    <div class="w-2 h-2 bg-blue-600 rounded-full"></div>
+                    Top Pages
+                </h3>
+            </div>
+            <div class="card-content">
+                <div class="space-y-3">
+                    <div class="flex items-center justify-between py-2">
+                        <span class="text-sm font-medium text-gray-900">/dashboard</span>
+                        <div class="flex items-center gap-2">
+                            <span class="text-sm text-gray-600">1,234</span>
+                            <span class="badge badge-success">+5%</span>
+                        </div>
+                    </div>
+                    <div class="flex items-center justify-between py-2">
+                        <span class="text-sm font-medium text-gray-900">/analytics</span>
+                        <div class="flex items-center gap-2">
+                            <span class="text-sm text-gray-600">987</span>
+                            <span class="badge badge-success">+12%</span>
+                        </div>
+                    </div>
+                    <div class="flex items-center justify-between py-2">
+                        <span class="text-sm font-medium text-gray-900">/reports</span>
+                        <div class="flex items-center gap-2">
+                            <span class="text-sm text-gray-600">654</span>
+                            <span class="badge badge-error">-2%</span>
+                        </div>
+                    </div>
+                    <div class="flex items-center justify-between py-2">
+                        <span class="text-sm font-medium text-gray-900">/settings</span>
+                        <div class="flex items-center gap-2">
+                            <span class="text-sm text-gray-600">321</span>
+                            <span class="badge badge-success">+8%</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="card">
+            <div class="card-header">
+                <h3 class="card-title flex items-center gap-2">
+                    <div class="w-2 h-2 bg-green-600 rounded-full"></div>
+                    Recent Activity
+                </h3>
+            </div>
+            <div class="card-content">
+                <div class="space-y-3">
+                    <div class="flex items-start gap-3 py-2">
+                        <div class="w-2 h-2 rounded-full mt-2 bg-green-500"></div>
+                        <div class="flex-1">
+                            <p class="text-sm font-medium text-gray-900">New user registered</p>
+                            <p class="text-xs text-gray-500">2 minutes ago</p>
+                        </div>
+                    </div>
+                    <div class="flex items-start gap-3 py-2">
+                        <div class="w-2 h-2 rounded-full mt-2 bg-blue-500"></div>
+                        <div class="flex-1">
+                            <p class="text-sm font-medium text-gray-900">Report generated</p>
+                            <p class="text-xs text-gray-500">5 minutes ago</p>
+                        </div>
+                    </div>
+                    <div class="flex items-start gap-3 py-2">
+                        <div class="w-2 h-2 rounded-full mt-2 bg-green-500"></div>
+                        <div class="flex-1">
+                            <p class="text-sm font-medium text-gray-900">System backup completed</p>
+                            <p class="text-xs text-gray-500">1 hour ago</p>
+                        </div>
+                    </div>
+                    <div class="flex items-start gap-3 py-2">
+                        <div class="w-2 h-2 rounded-full mt-2 bg-yellow-500"></div>
+                        <div class="flex-1">
+                            <p class="text-sm font-medium text-gray-900">High traffic alert</p>
+                            <p class="text-xs text-gray-500">2 hours ago</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    lucide.createIcons();
+});
+</script>
+{% endblock %}
