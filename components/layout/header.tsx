@@ -67,10 +67,10 @@ export function Header({ onMenuToggle }: HeaderProps) {
   }, [])
 
   return (
-    <header className="bg-white border-b border-gray-200 px-6 py-4 shadow-sm">
+    <header className="bg-gradient-to-r from-blue-600 via-indigo-600 to-purple-600 px-6 py-4 shadow-md text-white">
       <div className="flex items-center justify-between">
         <div className="flex items-center gap-4">
-          <Button variant="ghost" size="icon" onClick={onMenuToggle} className="lg:hidden">
+          <Button variant="ghost" size="icon" onClick={onMenuToggle} className="lg:hidden text-white hover:bg-white/20">
             <Menu className="h-5 w-5" />
           </Button>
           <Link href="/" className="flex items-center gap-3">
@@ -82,23 +82,26 @@ export function Header({ onMenuToggle }: HeaderProps) {
               className="object-contain"
             />
             <div className="flex flex-col">
-              <span className="font-semibold text-gray-900 text-sm">Student System Analytics</span>
-              <span className="text-xs text-gray-600">Master of Computer Networks</span>
+              <span className="font-semibold text-white text-sm">Student System Analytics</span>
+              <span className="text-xs text-white/80">Master of Computer Networks</span>
             </div>
           </Link>
         </div>
 
         <div className="flex items-center gap-4">
           <div className="relative hidden md:block">
-            <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400 h-4 w-4" />
-            <Input placeholder="Search analytics..." className="pl-10 w-64" />
+            <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 text-white/70 h-4 w-4" />
+            <Input
+              placeholder="Search analytics..."
+              className="pl-10 w-64 bg-white/20 border-white/30 text-white placeholder:text-white/70 focus:border-white/50 focus:ring-white/50"
+            />
           </div>
 
           <div className="relative" ref={dropdownRef}>
             <Button
               variant="ghost"
               size="icon"
-              className="relative"
+              className="relative text-white hover:bg-white/20"
               onClick={() => setShowNotifications(!showNotifications)}
             >
               <Bell className="h-5 w-5" />
@@ -108,7 +111,7 @@ export function Header({ onMenuToggle }: HeaderProps) {
             </Button>
 
             {showNotifications && (
-              <div className="absolute right-0 top-full mt-2 w-80 bg-white border border-gray-200 rounded-lg shadow-lg z-50">
+              <div className="absolute right-0 top-full mt-2 w-80 bg-white border border-gray-200 rounded-lg shadow-lg z-50 text-gray-900">
                 <div className="p-4 border-b border-gray-100">
                   <h3 className="font-semibold text-gray-900">System Announcements</h3>
                   <p className="text-sm text-gray-600">MCN Program Updates</p>

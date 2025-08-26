@@ -6,9 +6,9 @@ import { LayoutDashboard, BarChart3, FileText, ChevronLeft, ChevronRight } from 
 import { Button } from "@/components/ui/button"
 
 const navigation = [
-  { name: "Dashboard", href: "/", icon: LayoutDashboard },
-  { name: "Analytics", href: "/analytics", icon: BarChart3 },
-  { name: "Reports", href: "/reports", icon: FileText },
+  { name: "Student System Analytics", href: "/", icon: LayoutDashboard },
+  { name: "Student Behavior Analytics", href: "/user-behavior", icon: BarChart3 },
+  { name: "Report Generation", href: "/reports", icon: FileText },
 ]
 
 interface SidebarProps {
@@ -20,7 +20,12 @@ export function Sidebar({ collapsed = false, onToggle }: SidebarProps) {
   const pathname = usePathname()
 
   return (
-    <div className={cn("bg-gray-50 border-r border-gray-200 transition-all duration-300", collapsed ? "w-16" : "w-64")}>
+    <div
+      className={cn(
+        "bg-white/90 backdrop-blur-md border-r border-gray-200 shadow-lg transition-all duration-300",
+        collapsed ? "w-16" : "w-64",
+      )}
+    >
       <div className="flex flex-col h-full">
         <div className="p-4 border-b border-gray-200">
           <Button variant="ghost" size="icon" onClick={onToggle} className="ml-auto">
