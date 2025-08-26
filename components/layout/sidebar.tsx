@@ -6,9 +6,9 @@ import { LayoutDashboard, BarChart3, FileText, ChevronLeft, ChevronRight } from 
 import { Button } from "@/components/ui/button"
 
 const navigation = [
-  { name: "Dashboard", href: "/", icon: LayoutDashboard },
-  { name: "Analytics", href: "/analytics", icon: BarChart3 },
-  { name: "Reports", href: "/reports", icon: FileText },
+  { name: "Student System Analytics", href: "/", icon: LayoutDashboard },
+  { name: "Student Behavior Analytics", href: "/user-behavior", icon: BarChart3 },
+  { name: "Report Generation", href: "/reports", icon: FileText },
 ]
 
 interface SidebarProps {
